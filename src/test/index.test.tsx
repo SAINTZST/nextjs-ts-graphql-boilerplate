@@ -20,9 +20,9 @@ cache.writeQuery({
       __typename: 'User',
       id: 'Baa',
       name: 'Baa',
-      status: 'Healthy',
-    },
-  },
+      status: 'Healthy'
+    }
+  }
 })
 
 describe('Index', () => {

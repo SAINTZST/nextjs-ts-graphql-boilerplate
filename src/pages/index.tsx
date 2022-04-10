@@ -4,7 +4,7 @@ import {
   ViewerQuery,
   useViewerQuery,
   useUpdateNameMutation,
-  ViewerDocument,
+  ViewerDocument
 } from '../apollo/viewer.graphql'
 import { initializeApollo } from '../apollo/apollo'
 
@@ -16,7 +16,7 @@ const Index = () => {
   const onChangeName = () => {
     updateNameMutation({
       variables: {
-        name: newName,
+        name: newName
       },
       //Follow apollo suggestion to update cache
       //https://www.apollographql.com/docs/angular/features/cache-updates/#update
@@ -25,14 +25,14 @@ const Index = () => {
         if (!data) return // Cancel updating name in cache if no data is returned from mutation.
         // Read the data from our cache for this query.
         const { viewer } = cache.readQuery({
-          query: ViewerDocument,
+          query: ViewerDocument
         }) as ViewerQuery
         const newViewer = { ...viewer }
         // Add our comment from the mutation to the end.
         newViewer.name = data.updateName.name
         // Write our data back to the cache.
         cache.writeQuery({ query: ViewerDocument, data: { viewer: newViewer } })
-      },
+      }
     })
   }
 
@@ -59,13 +59,13 @@ export async function getStaticProps() {
   const apolloClient = initializeApollo()
 
   await apolloClient.query({
-    query: ViewerDocument,
+    query: ViewerDocument
   })
 
   return {
     props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
+      initialApolloState: apolloClient.cache.extract()
+    }
   }
 }
 

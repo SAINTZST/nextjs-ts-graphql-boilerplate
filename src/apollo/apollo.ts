@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import {
   ApolloClient,
   InMemoryCache,
-  NormalizedCacheObject,
+  NormalizedCacheObject
 } from '@apollo/client'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
@@ -22,7 +22,7 @@ function createIsomorphLink(context: ResolverContext = {}) {
     const { HttpLink } = require('@apollo/client')
     return new HttpLink({
       uri: '/api/graphql',
-      credentials: 'same-origin',
+      credentials: 'same-origin'
     })
   }
 }
@@ -31,7 +31,7 @@ function createApolloClient(context?: ResolverContext) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: createIsomorphLink(context),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache()
   })
 }
 

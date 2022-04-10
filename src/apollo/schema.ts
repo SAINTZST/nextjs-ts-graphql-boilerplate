@@ -10,5 +10,5 @@ const typeDefs = mergeTypeDefs(loadedFiles)
 
 export const schema = makeExecutableSchema({
   typeDefs,
-  resolvers,
+  resolvers
 })
