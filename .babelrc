@@ -1,4 +1,19 @@
 {
   "presets": ["next/babel"],
-  "plugins": ["graphql-let/babel"]
+  "plugins": [
+    "graphql-let/babel",
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "~": ".",
+          "@components": "./src/components",
+          "@core": "./src/core",
+          "@store": "./src/store",
+          "@styles": "./src/styles",
+          "@types": "./src/types"
+        }
+      }
+    ]
+  ]
 }
