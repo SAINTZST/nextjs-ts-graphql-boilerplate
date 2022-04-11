@@ -1,5 +1,11 @@
-import React, { useState, useContext, useCallback, useEffect } from 'react'
-import { useMediaQuery, Context as ResponsiveContext } from 'react-responsive'
+import React, {
+  useState,
+  useContext,
+  useCallback,
+  useEffect,
+  createContext
+} from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 import { getBreakPoints } from '@core/styles/helpers'
 
@@ -13,7 +19,33 @@ const SIZE_POINT_BY_BREAKPOINT = {
   xl3: 17
 }
 
-const ScreenContext = ({ children }) => {
+type ScreenValue = {
+  xs: boolean
+  sm: boolean
+  md: boolean
+  lg: boolean
+  xl: boolean
+  xl2: boolean
+  xl3: boolean
+  currentScreen: string
+  minimumScreen: (type: string) => boolean
+  maximumScreen: (type: string) => boolean
+}
+
+const ResponsiveContext = createContext<ScreenValue>({
+  xs: false,
+  sm: false,
+  md: false,
+  lg: false,
+  xl: false,
+  xl2: false,
+  xl3: false,
+  currentScreen: '',
+  minimumScreen: () => false,
+  maximumScreen: () => false
+})
+
+function ScreenContext({ children }: { children: any }): JSX.Element {
   const [currentScreen, setCurrentScreen] = useState('')
   const [sizePoint, setSizePoint] = useState(0)
 
@@ -122,13 +154,28 @@ const ScreenContext = ({ children }) => {
   )
 
   return (
-    <ResponsiveContext.Provider value={{}}>
+    <ResponsiveContext.Provider
+      value={
+        {
+          xs,
+          sm,
+          md,
+          lg,
+          xl,
+          xl2,
+          xl3,
+          currentScreen,
+          minimumScreen,
+          maximumScreen
+        } as any
+      }
+    >
       {children}
     </ResponsiveContext.Provider>
   )
 }
 
-const useScreen = () => {
+const useScreen = (): ScreenValue => {
   return useContext(ResponsiveContext)
 }
 

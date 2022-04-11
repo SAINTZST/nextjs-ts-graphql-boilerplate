@@ -2,6 +2,8 @@ import { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../core/libs/apollo/apollo'
 
+import ScreenContext from '@core/providers/ScreenContext'
+
 import '../App.css'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -9,7 +11,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <Component {...pageProps} />
+      <ScreenContext>
+        <Component {...pageProps} />
+      </ScreenContext>
     </ApolloProvider>
   )
 }
