@@ -17,7 +17,10 @@
     "paths": {
       "@graphql-types@": [
         "node_modules/@types/graphql-let/__generated__/__types__"
-      ]
+      ],
+      "@components/*": ["src/components/*"],
+      "@core/*": ["src/core/*"],
+      "@constants/*": ["src/constants/*"]
     },
     "incremental": true
   },

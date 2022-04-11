@@ -6,12 +6,9 @@
       "module-resolver",
       {
         "alias": {
-          "~": ".",
           "@components": "./src/components",
           "@core": "./src/core",
-          "@store": "./src/store",
-          "@styles": "./src/styles",
-          "@types": "./src/types"
+          "@constants": "./src/constants"
         }
       }
     ]

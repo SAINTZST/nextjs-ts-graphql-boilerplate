@@ -5,8 +5,8 @@ import {
   useViewerQuery,
   useUpdateNameMutation,
   ViewerDocument
-} from '../apollo/viewer.graphql'
-import { initializeApollo } from '../apollo/apollo'
+} from '../core/libs/apollo/viewer.graphql'
+import { initializeApollo } from '../core/libs/apollo/apollo'
 
 const Index = () => {
   const { viewer } = useViewerQuery().data!
