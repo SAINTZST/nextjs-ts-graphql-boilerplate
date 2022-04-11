@@ -20,7 +20,8 @@
       ],
       "@components/*": ["src/components/*"],
       "@core/*": ["src/core/*"],
-      "@constants/*": ["src/constants/*"]
+      "@constants/*": ["src/constants/*"],
+      "@locales/*": ["src/locales/*"]
     },
     "incremental": true
   },
