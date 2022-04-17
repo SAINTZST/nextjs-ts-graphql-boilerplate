@@ -1,19 +1,12 @@
 import { AppProps } from 'next/app'
-import { ApolloProvider } from '@apollo/client'
-import { useApollo } from '../core/libs/apollo/apollo'
-
-import ScreenContext from '@core/providers/ScreenContext'
+import ComposeProvider from '@core/providers/ComposeProvider'
 
 import '../App.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const apolloClient = useApollo(pageProps.initialApolloState)
-
   return (
-    <ApolloProvider client={apolloClient}>
-      <ScreenContext>
-        <Component {...pageProps} />
-      </ScreenContext>
-    </ApolloProvider>
+    <ComposeProvider pageProps={pageProps}>
+      <Component {...pageProps} />
+    </ComposeProvider>
   )
 }

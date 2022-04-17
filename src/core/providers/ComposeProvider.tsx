@@ -1,32 +1,30 @@
-// import React from 'react'
-// import { I18nextProvider } from 'react-i18next'
+import React from 'react'
 
-// import { ThemeProvider } from '@emotion/react'
+import { Provider as ReduxProvider } from 'react-redux'
+import { ApolloProvider } from '@apollo/client'
 
-// import ScreenContext from './ScreenContext'
+import ScreenContext from './ScreenContext'
 
-// import { colors } from '@core/styles'
-// import i18n from '@core/config/i18n'
-// import ModalContext from './ModalContext'
-// import { Provider as ReduxProvider } from 'react-redux'
-// import { configureStore } from '@core/stores'
+import { useApollo } from '@core/libs/apollo/apollo'
 
-// const ComposeProvider = ({ children }) => {
-//   const providers = React.useMemo(
-//     () => [
-//       [I18nextProvider, { i18n }],
-//       [ReduxProvider, { store: configureStore() }],
-//       [ThemeProvider, { theme: colors }],
-//       ScreenContext,
-//       ModalContext
-//     ],
-//     []
-//   )
+import { store } from '@core/stores'
 
-//   return providers.reduceRight((componentTree, cfg) => {
-//     const [Provider, props] = Array.isArray(cfg) ? cfg : [cfg, {}]
-//     return <Provider {...props}>{componentTree}</Provider>
-//   }, children)
-// }
+const ComposeProvider = ({ children, pageProps }) => {
+  const apolloClient = useApollo(pageProps.initialApolloState)
 
-// export default ComposeProvider
+  const providers = React.useMemo(
+    () => [
+      [ReduxProvider, { store: store }],
+      [ApolloProvider, { client: apolloClient }],
+      ScreenContext
+    ],
+    []
+  )
+
+  return providers.reduceRight((componentTree, cfg) => {
+    const [Provider, props] = Array.isArray(cfg) ? cfg : [cfg, {}]
+    return <Provider {...props}>{componentTree}</Provider>
+  }, children)
+}
+
+export default ComposeProvider
